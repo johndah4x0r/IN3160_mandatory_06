@@ -65,5 +65,6 @@ begin
         d0 when cs = '0' else
         d1;
 
+    -- syntesizer's note: `abcdefg` is big-endian and literal
     abcdefg <= bin2ssd(d_used);
 end architecture secret;

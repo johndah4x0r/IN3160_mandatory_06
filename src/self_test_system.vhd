@@ -2,20 +2,20 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity self_test_unit is
+entity self_test_system is
     port (
         mclk, reset : in std_ulogic;
         c : out std_ulogic;
         abcdefg : out std_ulogic_vector(6 downto 0)
     );
-end entity self_test_unit;
+end entity self_test_system;
 
-architecture rtl of self_test_unit is
+architecture rtl of self_test_system is
     signal d0, d1 : std_ulogic_vector(3 downto 0);
 begin
     driver: entity work.seg7ctrl(secret)
         generic map (
-            LIMIT => 10
+            LIMIT => 1_000_000
         )
 
         port map (
@@ -29,7 +29,7 @@ begin
 
     sequencer: entity work.self_test(rtl)
         generic map (
-            LIMIT => 100
+            LIMIT => 100_000_000
         )
 
         port map (

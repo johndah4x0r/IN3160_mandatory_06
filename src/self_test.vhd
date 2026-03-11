@@ -21,27 +21,28 @@ architecture rtl of self_test is
     end record;
     type seq_mem_t is array (natural range <>) of seq_t;
 
+    -- you better be disciplined with your endianness!
     constant seq_mem : seq_mem_t := (
-        (d0 => x"1", d1 => x"2"),
-        (d0 => x"3", d1 => x"4"),
-        (d0 => x"4", d1 => x"0"),
-        (d0 => x"0", d1 => x"0"),
-        (d0 => x"5", d1 => x"6"),
-        (d0 => x"7", d1 => x"3"),
-        (d0 => x"0", d1 => x"0"),
-        (d0 => x"8", d1 => x"6"),
-        (d0 => x"9", d1 => x"0"),
-        (d0 => x"0", d1 => x"0"),
-        (d0 => x"A", d1 => x"B"),
-        (d0 => x"3", d1 => x"0"),
-        (d0 => x"0", d1 => x"0"),
-        (d0 => x"C", d1 => x"6"),
-        (d0 => x"6", d1 => x"5"),
-        (d0 => x"0", d1 => x"0")
+        (d1 => x"1", d0 => x"2"),
+        (d1 => x"3", d0 => x"4"),
+        (d1 => x"4", d0 => x"0"),
+        (d1 => x"0", d0 => x"0"),
+        (d1 => x"5", d0 => x"6"),
+        (d1 => x"7", d0 => x"3"),
+        (d1 => x"0", d0 => x"0"),
+        (d1 => x"8", d0 => x"6"),
+        (d1 => x"9", d0 => x"0"),
+        (d1 => x"0", d0 => x"0"),
+        (d1 => x"A", d0 => x"B"),
+        (d1 => x"3", d0 => x"0"),
+        (d1 => x"0", d0 => x"0"),
+        (d1 => x"C", d0 => x"6"),
+        (d1 => x"6", d0 => x"5"),
+        (d1 => x"0", d0 => x"0")
     );
 
     signal seq_ctr : integer := 0;
-    signal ctr : unsigned(19 downto 0) := x"FFFFF";
+    signal ctr : unsigned(31 downto 0) := (others => '1');
     signal ce : std_ulogic := '0';
 
 begin
